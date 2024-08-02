@@ -1,23 +1,6 @@
 @extends('layout')
     @section('content')
-    <nav class="navbar navbar-expand-lg bg-secondary">
-        <div class="container-fluid">
-          <a class="navbar-brand text-white" href="{{ Route('contact.index') }}">CMS</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="{{ Route('contact.index') }}">Contacts</a>
-              </li>
-              <li>
-                <a class="nav-link text-white" aria-current="page" href="{{ Route('contact.create') }}">Create Contact</a>  
-              </li>          
-            </ul>
-          </div>
-        </div>
-    </nav>
+    <div class="container">
         <div class="herader text-center mt-4">
             <h2>Contact Management Application</h2>
         </div>
@@ -36,8 +19,7 @@
                     </form>
                 </div>
                 <div class="col-md-4"></div>
-                <div class="col-md-4">
-                </div>
+                <div class="col-md-4"></div>
             </div>
             <table class="table table-striped table-bordered">
                 <thead>
@@ -70,4 +52,5 @@
             </table>
             {{ $contacts->links() }}
         </div>
+    </div>
     @endsection

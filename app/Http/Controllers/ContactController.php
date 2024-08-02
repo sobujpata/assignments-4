@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use GuzzleHttp\Promise\Create;
+use PhpParser\Node\Stmt\Return_;
 
 class ContactController extends Controller
 {
@@ -39,23 +41,34 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:contacts',
+            'phone' => 'nullable',
+            'address' => 'nullable'
+        ]);
+        Contact::Create($request->all());
+        return redirect()->route('contact.index')->with('success', 'Contact created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $contact = Contact::findOrFail($id);
+        Return view('show', compact('contact'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        
+        $contact = Contact::findOrFail($id);
+
+        Return view('edit', compact('contact'));
     }
 
     /**
@@ -63,14 +76,27 @@ class ContactController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:contacts,email,' . $id,
+            'phone' => 'nullable',
+            'address' => 'nullable',
+        ]);
+
+        $contact = Contact::findOrFail($id);
+        $contact->update($request->all());
+
+        return redirect()->route('contact.index')->with('success', 'Contact updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+
+        return redirect()->route('contact.index')->with('success', 'Contact delete successfully.');
     }
 }

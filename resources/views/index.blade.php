@@ -35,7 +35,7 @@
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr class="text-center">
-                        <th>Id</th>
+                        <th>Ser No</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Created At</th>
@@ -43,7 +43,7 @@
                     </tr>
                 </thead>
                 @php
-                    $i=1;
+                    $i = ($contacts->perPage() * ($contacts->currentPage() - 1)) + 1;
                 @endphp
                 @foreach ($contacts as $contact)
                 <tbody >

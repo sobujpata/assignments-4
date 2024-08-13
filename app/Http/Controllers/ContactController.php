@@ -25,7 +25,7 @@ class ContactController extends Controller
             $contacts->orderBy('name', 'asc');
         }
 
-        return view('index', ['contacts'=>$contacts->paginate(10)]);
+        return view('index', ['contacts'=>$contacts->Paginate($perPage = 10, $columns = ['*'], $pageName = 'contacts')]);
     }
 
     /**

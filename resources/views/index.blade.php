@@ -18,16 +18,27 @@
                     </div>
                     </form>
                 </div>
-                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <!-- Example single danger button -->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort By
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('contact.index', ['sort'=>'name', 'direction'=>request('direction')==='asc' ? 'desc':'asc']) }}">By Name</a></li>
+                            <li><a class="dropdown-item" href="{{ route('contact.index', ['sort' =>'name', 'direction'=>request('direction')==='asc'?'desc':'asc']) }}">By Create Time</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="col-md-4"></div>
             </div>
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr class="text-center">
                         <th>Id</th>
-                        <th><a href="{{ route('contact.index', ['sort'=>'name', 'direction'=>request('direction')==='asc' ? 'desc':'asc']) }}">Name</a></th>
+                        <th>Name</th>
                         <th>Email</th>
-                        <th><a href="{{ route('contact.index', ['sort' =>'name', 'direction'=>request('direction')==='asc'?'desc':'asc']) }}">Created At</a></th>
+                        <th>Created At</th>
                         <th>Action</th>
                     </tr>
                 </thead>
